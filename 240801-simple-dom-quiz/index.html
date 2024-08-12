@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Simple Quiz</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1 class="text-center">JavaScript <span class="quiz">Quiz</span></h1>
+        </header>
+
+        <main>
+            <div id="start-container" class="container">
+                <p>You will have <b>15 Questions</b> and <b>60 seconds</b> to answer each question. Click the button to
+                    start the
+                    quiz.</p>
+                <button id="start-btn" class="btn-primary">Start Quiz</button>
+            </div>
+
+            <div id="quiz-container" class="container">
+                <div class="quiz-header">
+                    <div id="timer">
+                        <div id="remaining-time">xx</div>
+                        <div id="time-up">Time UP</div>
+                    </div>
+
+                    <div id="score">SCORE: <b><span id="score-val">0</span></b></div>
+                </div>
+                <div class="qtn-container">
+                    <div id="qtn-num">
+                        <div id="current-qtn">X</div>/ <div id="total-qtn">N</div>
+                    </div>
+
+                    <div id="question">Question goes here...</div>
+                </div>
+                <div class="options-container">
+                </div>
+
+                <div class="description-container">Explanation: Delhi is the capital of India.</div>
+                <div class="btn-container">
+                    <button id="next-btn" class="btn-primary">Next</button>
+                    <button id="show-result-btn" class="btn-primary" onclick="showResult()">Show Result</button>
+                </div>
+            </div>
+
+            <div id="result-container" class="container">
+                <h2>Quiz Result</h2>
+                <div>Attempt: <span id="attempt-qtn-box"></span></div>
+                <div>Correct: <span id="correct-qtn-box"></span></div>
+                <div>Wrong: <span id="wrong-qtn-box"></span></div>
+                <div>Percentage: <span id="percentage-box"></span></div>
+                <div>
+                    <button id="restart-btn" class="btn-primary" onclick="restartQuiz()">Restart Quiz</button>
+                    <button id="home-btn" class="btn-primary" onclick="goHome()">Go To Home</button>
+                </div>
+            </div>
+        </main>
+
+        <aside>
+            <!-- Feedback From -->
+            <div class="feedback-form">
+                <h3 id="form-title">Help me to improve it!</h3>
+                <form id="feedback-form" method="POST">
+                    <!-- Satisfaction option with 3 icon emojis -->
+                    <label for="satisfaction">How satisfied are you with this quiz?</label>
+                    <div id="satisfaction">
+                        <input type="radio" id="sad" name="satisfaction" value="sad">
+                        <label for="sad">😞</label>
+                        <input type="radio" id="neutral" name="satisfaction" value="neutral">
+                        <label for="neutral">😐</label>
+                        <input type="radio" id="happy" name="satisfaction" value="happy">
+                        <label for="happy">😊</label>
+                    </div>
+
+                    <!-- Do you like to see more quizzes like this one -->
+                    <label for="more-quizzes">Would you like to see more quizzes like this one?</label>
+                    <div id="more-quizzes">
+                        <input type="radio" id="no" name="more-quizzes" value="no">
+                        <label for="no">No</label>
+                        <input type="radio" id="yes" name="more-quizzes" value="yes">
+                        <label for="yes">Yes</label>
+                    </div>
+
+                    <!-- How we can connect -->
+                    <label for="connect">How can I connect with you?</label>
+                    <input type="text" id="connect" name="connect" placeholder="Your email or social media handle">
+
+                    <!-- Wanna say something, any things extra -->
+                    <label for="extra">Anything else you'd like to share?</label>
+                    <textarea id="extra" name="extra" placeholder="Your feedback"></textarea>
+
+                    <button type="submit" class="btn-primary" id="submit-feedback">
+                        Submit
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+
+                <!-- Feedback Form Success Message -->
+                <div id="feedback-success">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Thank you for your valuable feedback!</h3>
+                </div>
+
+                <!-- Feedback Form Error Message -->
+                <div id="feedback-error">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Oops! Something went wrong. Please try again.</h3>
+                </div>
+
+                <!-- Feedback Form Loading Message -->
+                <div id="feedback-loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <h3>Submitting your feedback...</h3>
+                </div>
+            </div>
+
+            <!-- Open Form -->
+            <div class="open-form" id="open-form">
+                <i class="fas fa-comment-alt"></i>
+            </div>
+
+        </aside>
+        <footer>
+            <p class="text-center">Created with ☕ and ❤️ by <a href="https://www.linkedin.com/in/anshupatelz/">Anshu
+                    Patel</a></p>
+        </footer>
+
+        <script src="app.js"></script>
+    </body>
+
+</html>
