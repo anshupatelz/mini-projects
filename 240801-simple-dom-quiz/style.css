@@ -167,17 +167,6 @@ main .container {
     width: calc(50% - 5px);
 }
 
-@media screen and (max-width: 600px) {
-    .options-container {
-        flex-direction: column;
-    }
-
-    .options-container .option {
-        width: 100%;
-    }
-
-}
-
 .options-container .correctAnswer {
     background-color: var(--green);
     border: 2px solid var(--green-dark);
@@ -216,6 +205,33 @@ footer {
     text-align: center;
 }
 
+@media screen and (max-width: 600px) {
+
+    .qtn-container {
+        font-size: 1.2rem;
+    }
+
+    .options-container {
+        flex-direction: column;
+    }
+
+    .options-container .option {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+}
+
+/* Overlay */
+.show-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+}
 
 /* Feedback Form */
 .open-form {
@@ -248,7 +264,7 @@ footer {
     z-index: 1000;
 }
 
-/* Style the form elements */
+
 .feedback-form h3 {
     margin-bottom: 20px;
 }
@@ -362,4 +378,10 @@ footer {
     color: var(--purple-dark);
     font-weight: 600;
     font-size: 1.4rem;
+}
+
+.error-message {
+    color: var(--red);
+    font-size: 12px;
+    margin-top: 5px;
 }

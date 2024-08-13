@@ -66,7 +66,7 @@
             </div>
         </main>
 
-        <aside>
+        <div class="form-container">
             <!-- Feedback From -->
             <div class="feedback-form">
                 <h3 id="form-title">Help me to improve it!</h3>
@@ -74,26 +74,29 @@
                     <!-- Satisfaction option with 3 icon emojis -->
                     <label for="satisfaction">How satisfied are you with this quiz?</label>
                     <div id="satisfaction">
-                        <input type="radio" id="sad" name="satisfaction" value="sad">
+                        <input type="radio" id="sad" name="satisfaction" value="sad" required>
                         <label for="sad">😞</label>
-                        <input type="radio" id="neutral" name="satisfaction" value="neutral">
+                        <input type="radio" id="neutral" name="satisfaction" value="neutral" required>
                         <label for="neutral">😐</label>
-                        <input type="radio" id="happy" name="satisfaction" value="happy">
+                        <input type="radio" id="happy" name="satisfaction" value="happy" required>
                         <label for="happy">😊</label>
                     </div>
+                    <div id="satisfaction-error" class="error-message"></div>
 
                     <!-- Do you like to see more quizzes like this one -->
                     <label for="more-quizzes">Would you like to see more quizzes like this one?</label>
                     <div id="more-quizzes">
-                        <input type="radio" id="no" name="more-quizzes" value="no">
+                        <input type="radio" id="no" name="more-quizzes" value="no" required>
                         <label for="no">No</label>
-                        <input type="radio" id="yes" name="more-quizzes" value="yes">
+                        <input type="radio" id="yes" name="more-quizzes" value="yes" required>
                         <label for="yes">Yes</label>
                     </div>
+                    <div id="more-quizzes-error" class="error-message"></div>
 
                     <!-- How we can connect -->
                     <label for="connect">How can I connect with you?</label>
-                    <input type="text" id="connect" name="connect" placeholder="Your email or social media handle">
+                    <input type="text" id="connect" name="connect" placeholder="Your email or social media handle"
+                        required>
 
                     <!-- Wanna say something, any things extra -->
                     <label for="extra">Anything else you'd like to share?</label>
@@ -128,8 +131,7 @@
             <div class="open-form" id="open-form">
                 <i class="fas fa-comment-alt"></i>
             </div>
-
-        </aside>
+        </div>
         <footer>
             <p class="text-center">Created with ☕ and ❤️ by <a href="https://www.linkedin.com/in/anshupatelz/">Anshu
                     Patel</a></p>

@@ -300,8 +300,10 @@ document.getElementById('open-form').addEventListener('click', function () {
     const form = document.querySelector('.feedback-form');
     if (form.style.display === 'block') {
         form.style.display = 'none';
+        document.querySelector('.form-container').classList.remove('show-overlay');
     } else {
         form.style.display = 'block';
+        document.querySelector('.form-container').classList.add('show-overlay');
     }
 });
 
@@ -325,7 +327,37 @@ document.querySelectorAll('#more-quizzes input[type="radio"]').forEach((input) =
     });
 });
 
-// submit feedback form in google sheet and show thank you message after submission
+// Handle feedback form submission
+document.getElementById('submit-feedback').addEventListener('click', function (event) {
+
+    // Validate form fields
+    let isValid = true;
+
+    // Check satisfaction radio buttons
+    const satisfactionRadios = document.getElementsByName('satisfaction');
+    const satisfactionError = document.getElementById('satisfaction-error');
+    if (![...satisfactionRadios].some(radio => radio.checked)) {
+        satisfactionError.textContent = 'Please select your satisfaction level.';
+        isValid = false;
+    } else {
+        satisfactionError.textContent = '';
+    }
+
+    // Check more-quizzes radio buttons
+    const moreQuizzesRadios = document.getElementsByName('more-quizzes');
+    const moreQuizzesError = document.getElementById('more-quizzes-error');
+    if (![...moreQuizzesRadios].some(radio => radio.checked)) {
+        moreQuizzesError.textContent = 'Please select if you want more quizzes.';
+        isValid = false;
+    } else {
+        moreQuizzesError.textContent = '';
+    }
+
+    if (!isValid) {
+        event.preventDefault();
+    }
+});
+
 // submit feedback form in google sheet and show thank you message after submission
 const submitForm = (e) => {
     e.preventDefault();
