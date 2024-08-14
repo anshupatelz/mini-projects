@@ -385,3 +385,50 @@ footer {
     font-size: 12px;
     margin-top: 5px;
 }
+
+/* Product Walkthrough */
+.product-walkthrough {
+    text-align: center;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #444;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    max-width: 300px;
+    position: absolute;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    /* opacity: 0; */
+    transform: translateY(-10px);
+}
+
+.product-walkthrough.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product-walkthrough button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.product-walkthrough button:hover {
+    background-color: #0056b3;
+}
+
+.product-walkthrough button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.product-walkthrough .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}

@@ -398,3 +398,64 @@ const submitForm = (e) => {
 
 // Attach the submitForm function to the form's submit event
 document.querySelector('.feedback-form').addEventListener('submit', submitForm);
+
+
+const steps = [
+    {
+        element: '#start-btn',
+        intro: 'Click here to start the quiz!',
+        position: 'bottom'
+    },
+    {
+        element: '.options-container',
+        intro: 'Select an option to answer the question.',
+        position: 'top'
+    },
+    {
+        element: '#next-btn',
+        intro: 'Click here to move to the next question.',
+        position: 'right'
+    },
+    {
+        element: '#open-form',
+        intro: 'Click here to provide feedback about the quiz.',
+        position: 'right'
+    }
+];
+
+steps.forEach((step, index) => {
+    let element = document.createElement('div');
+    element.innerHTML = `<p>${step.intro}</p>`;
+    element.classList.add('product-walkthrough');
+
+    let buttons = document.createElement('div');
+    buttons.classList.add('button-container');
+    element.appendChild(buttons);
+
+    let prevBtn = document.createElement('button');
+    prevBtn.textContent = 'Previous';
+    prevBtn.disabled = index === 0;
+    prevBtn.onclick = () => navigateToStep(index - 1);
+    buttons.appendChild(prevBtn);
+
+    let nextBtn = document.createElement('button');
+    nextBtn.textContent = 'Next';
+    nextBtn.disabled = index === steps.length - 1;
+    nextBtn.onclick = () => navigateToStep(index + 1);
+    buttons.appendChild(nextBtn);
+
+    document.querySelector(step.element).parentNode.appendChild(element);
+});
+
+function navigateToStep(index) {
+    const allWalkthroughs = document.querySelectorAll('.product-walkthrough');
+    allWalkthroughs.forEach((el, idx) => {
+        el.classList.remove('active');
+        if (idx === index) {
+            el.classList.add('active');
+        }
+    });
+}
+
+// Start the walkthrough by activating the first step
+navigateToStep(0);
