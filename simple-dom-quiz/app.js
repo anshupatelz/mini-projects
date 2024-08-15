@@ -400,62 +400,111 @@ const submitForm = (e) => {
 document.querySelector('.feedback-form').addEventListener('submit', submitForm);
 
 
+// Product Walkthrough
 const steps = [
     {
         element: '#start-btn',
-        intro: 'Click here to start the quiz!',
-        position: 'bottom'
+        intro: 'Click the Start button to begin the quiz.',
+        position: 'buttom'
     },
     {
-        element: '.options-container',
-        intro: 'Select an option to answer the question.',
-        position: 'top'
-    },
-    {
-        element: '#next-btn',
-        intro: 'Click here to move to the next question.',
-        position: 'right'
-    },
-    {
-        element: '#open-form',
-        intro: 'Click here to provide feedback about the quiz.',
-        position: 'right'
+        element: '.open-form',
+        intro: 'Click the Feedback button to provide feedback.',
+        position: 'left'
     }
 ];
 
-steps.forEach((step, index) => {
-    let element = document.createElement('div');
-    element.innerHTML = `<p>${step.intro}</p>`;
-    element.classList.add('product-walkthrough');
-
-    let buttons = document.createElement('div');
-    buttons.classList.add('button-container');
-    element.appendChild(buttons);
-
-    let prevBtn = document.createElement('button');
-    prevBtn.textContent = 'Previous';
-    prevBtn.disabled = index === 0;
-    prevBtn.onclick = () => navigateToStep(index - 1);
-    buttons.appendChild(prevBtn);
-
-    let nextBtn = document.createElement('button');
-    nextBtn.textContent = 'Next';
-    nextBtn.disabled = index === steps.length - 1;
-    nextBtn.onclick = () => navigateToStep(index + 1);
-    buttons.appendChild(nextBtn);
-
-    document.querySelector(step.element).parentNode.appendChild(element);
-});
-
-function navigateToStep(index) {
-    const allWalkthroughs = document.querySelectorAll('.product-walkthrough');
-    allWalkthroughs.forEach((el, idx) => {
-        el.classList.remove('active');
-        if (idx === index) {
-            el.classList.add('active');
-        }
-    });
+// Create the walkthrough container and append to the document
+function createWalkthroughContainer() {
+    const container = document.createElement('div');
+    container.classList.add('walkthrough-container');
+    return container;
 }
 
-// Start the walkthrough by activating the first step
-navigateToStep(0);
+// Create the walkthrough step with instructions and buttons
+function createWalkthroughStep(step, onNext, onSkip) {
+    const walkthrough = document.createElement('div');
+    walkthrough.classList.add(`${step.position}-walkthrough`);
+    walkthrough.id = 'walkthrough';
+
+    const p = document.createElement('p');
+    p.textContent = step.intro;
+
+    const buttons = createWalkthroughButtons(step, onNext, onSkip);
+
+    walkthrough.appendChild(p);
+    walkthrough.appendChild(buttons);
+
+    return walkthrough;
+}
+
+// Create the buttons for the walkthrough (Next and Skip)
+function createWalkthroughButtons(step, onNext, onSkip) {
+    const buttons = document.createElement('div');
+    buttons.classList.add('buttons');
+
+    // const skipBtn = document.createElement('button');
+    // skipBtn.id = 'skip-walkthrough';
+    // skipBtn.textContent = 'Skip';
+    // skipBtn.addEventListener('click', onSkip);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.id = 'next-walkthrough';
+    if (step.element === ".open-form") {
+        nextBtn.textContent = 'Finish';
+    } else {
+        nextBtn.textContent = 'Next';
+    }
+    nextBtn.addEventListener('click', onNext);
+
+    // buttons.appendChild(skipBtn);
+    buttons.appendChild(nextBtn);
+
+    return buttons;
+}
+
+// Position the walkthrough container next to the target element
+function positionWalkthrough(step, container) {
+    const targetElement = document.querySelector(step.element);
+    const parentElement = targetElement.parentElement;
+    parentElement.appendChild(container);
+
+    // You can add logic here to adjust the position based on the `step.position`
+}
+
+// Handle moving to the next step
+function goToNextStep(currentStepIndex, container) {
+    const nextStepIndex = currentStepIndex + 1;
+    if (nextStepIndex < steps.length) {
+        showWalkthroughStep(nextStepIndex, container);
+    } else {
+        container.remove();
+    }
+}
+
+// Show the specific walkthrough step
+function showWalkthroughStep(stepIndex, container) {
+    const step = steps[stepIndex];
+    container.innerHTML = '';  // Clear previous content
+
+    const walkthroughStep = createWalkthroughStep(
+        step,
+        () => goToNextStep(stepIndex, container),
+        () => container.remove()
+    );
+
+    container.appendChild(walkthroughStep);
+    positionWalkthrough(step, container);
+}
+
+// Start the product walkthrough
+function startWalkthrough() {
+    const walkthroughContainer = createWalkthroughContainer();
+    showWalkthroughStep(0, walkthroughContainer);
+}
+
+// Start the walkthrough when the page loads only for the first time
+if (!localStorage.getItem('walkthrough')) {
+    startWalkthrough();
+    localStorage.setItem('walkthrough', 'true');
+}

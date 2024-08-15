@@ -82,6 +82,7 @@ main .container {
     text-align: center;
     font-size: 1.4rem;
     font-weight: 500;
+    position: relative;
 }
 
 #quiz-container,
@@ -234,15 +235,21 @@ footer {
 }
 
 /* Feedback Form */
-.open-form {
+.feedback-cta {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 15px;
+}
+
+.open-form {
     background-color: var(--purple-dark);
     color: white;
     border-radius: 100px;
     cursor: pointer;
-    z-index: 1000;
     width: 50px;
     height: 50px;
     display: flex;
@@ -263,7 +270,6 @@ footer {
     border-radius: 8px;
     z-index: 1000;
 }
-
 
 .feedback-form h3 {
     margin-bottom: 20px;
@@ -387,48 +393,81 @@ footer {
 }
 
 /* Product Walkthrough */
-.product-walkthrough {
-    text-align: center;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #444;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
-    max-width: 300px;
-    position: absolute;
-    z-index: 1000;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    /* opacity: 0; */
-    transform: translateY(-10px);
-}
-
-.product-walkthrough.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.product-walkthrough button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.product-walkthrough button:hover {
-    background-color: #0056b3;
-}
-
-.product-walkthrough button:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
-}
-
-.product-walkthrough .button-container {
+.walkthrough-container {
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+}
+
+.buttom-walkthrough {
+    background-color: rgb(88, 88, 88);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    position: absolute;
+    top: 0px;
+}
+
+.buttom-walkthrough::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: auto;
+    right: auto;
+    transform: translateY(-50%);
+    border: 10px solid transparent;
+    border-bottom-color: rgb(88, 88, 88);
+}
+
+.left-walkthrough {
+    background-color: rgb(88, 88, 88);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.left-walkthrough::before {
+    content: '';
+    position: absolute;
+    top: auto;
+    right: -10px;
+    top: auto;
+    bottom: auto;
+    transform: translateX(50%);
+    border: 10px solid transparent;
+    border-left-color: rgb(88, 88, 88);
+}
+
+.walkthrough-container .buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.walkthrough-container .buttons button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
 }
